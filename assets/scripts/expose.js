@@ -10,7 +10,7 @@ const playButton = document.querySelector("button");
 
 const volume_control = document.getElementById("volume_control");
 function init() {
-  // TODO
+  // set up dropdown items
   const hornData = {
     "air-horn": {
       image: "assets/images/air-horn.svg",
@@ -28,6 +28,7 @@ function init() {
 
   hornSelect.addEventListener("change", (event) => {
     const selectedHorn = event.target.value;
+    // change img and audio corresponding to hornData value
     image.src = hornData[selectedHorn].image;
     image.alt = selectedHorn;
     audio.src = hornData[selectedHorn].audio;
@@ -52,7 +53,7 @@ function init() {
     } else {
       volumeIcon.src = volumeIcons[3];
     }
-
+    // divide by 100
     audio.volume = volume / 100;
   });
 
@@ -62,6 +63,7 @@ function init() {
     audio.play();
 
     if (hornSelect.value === "party-horn") {
+      // show some confetti!
       confetti.addConfetti();
     }
   });

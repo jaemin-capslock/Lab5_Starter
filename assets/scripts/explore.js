@@ -1,34 +1,35 @@
 // explore.js
 
-window.addEventListener('DOMContentLoaded', init);
-let voices = []
+window.addEventListener("DOMContentLoaded", init);
+let voices = [];
 const synth = window.speechSynthesis;
-const voiceSelect = document.getElementById('voice-select');
-const textToSpeak = document.getElementById('text-to-speak');
-const pressToTalkButton = document.querySelector('button');
-const faceImage = document.querySelector('img');
-const openMouthImage = 'assets/images/smiling-open.png';
-const smilingFaceImage = 'assets/images/smiling.png';
+const voiceSelect = document.getElementById("voice-select");
+const textToSpeak = document.getElementById("text-to-speak");
+const pressToTalkButton = document.querySelector("button");
+const faceImage = document.querySelector("img");
+const openMouthImage = "assets/images/smiling-open.png";
+const smilingFaceImage = "assets/images/smiling.png";
 function init() {
   //const voices = speechSynthesis.getVoices();
 
-
-  populateVoiceList()
-  pressToTalkButton.addEventListener('click', () => {
-    const selectedVoiceName = voiceSelect.selectedOptions[0].getAttribute('data-name');
-    const selectedVoice = voices.find((voice) => voice.name === selectedVoiceName);
+  populateVoiceList();
+  pressToTalkButton.addEventListener("click", () => {
+    const selectedVoiceName =
+      voiceSelect.selectedOptions[0].getAttribute("data-name");
+    const selectedVoice = voices.find(
+      (voice) => voice.name === selectedVoiceName
+    );
     const utterance = new SpeechSynthesisUtterance(textToSpeak.value);
-  
+
     utterance.voice = selectedVoice;
     synth.speak(utterance);
-  
+
     faceImage.src = openMouthImage;
-  
+
     utterance.onend = () => {
       faceImage.src = smilingFaceImage;
     };
   });
-
 }
 
 function populateVoiceList() {
